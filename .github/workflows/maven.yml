@@ -31,5 +31,6 @@ jobs:
 
       - name: Print Successfull
         run: echo "SUCCESS"
-#      - name: Execute Main artifact
-#        run: mvn exec:java -Dexec.mainClass="ce.kiran.Main"
+
+      - name: Execute Main artifact
+        run: mvn exec:java -Dexec.mainClass="ce.kiran.Main"
