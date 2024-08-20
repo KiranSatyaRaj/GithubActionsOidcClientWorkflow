@@ -37,9 +37,11 @@ public class Main {
         GithubActionsOidcClient client = GithubActionsOidcClient.builder().build();
         Map<String, String> env = System.getenv();
         OidcToken token = client.getIDToken(env);
-        System.out.printf("Oidc token is %s\n", token.getIdToken());
-        System.out.printf("Issuer is %s\n", token.getIssuer());
-        System.out.printf("Subject is %s\n", token.getSubjectAlternativeName());
-
+//        System.out.printf("Oidc token is %s\n", token.getIdToken());
+//        System.out.printf("Issuer is %s\n", token.getIssuer());
+//        System.out.printf("Subject is %s\n", token.getSubjectAlternativeName());
+        System.out.println("Github Actions : " + env.get("GITHUB_ACTIONS"));
+        System.out.println("Token : " + env.get("ACTIONS_ID_TOKEN_REQUEST_TOKEN"));
+        System.out.println("URL : " + env.get("ACTIONS_ID_TOKEN_REQUEST_URL"));
     }
 }
