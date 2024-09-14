@@ -68,7 +68,7 @@ public class CustomOidcClient implements OidcClient {
                 req.getHeaders().setAuthorization("Bearer " + bearer);
                 req.getHeaders().setAccept("application/json; api-version=2.0");
                 req.getHeaders().setContentType("application/json");
-                GithubActionsOidcClient.GithubOidcJsonResponse resp = (GithubActionsOidcClient.GithubOidcJsonResponse)req.execute().parseAs(GithubActionsOidcClient.GithubOidcJsonResponse.class);
+                CustomOidcJsonResponse resp = req.execute().parseAs(CustomOidcJsonResponse.class);
                 String idToken = resp.toString();
                 this.id_token = idToken;
                 JsonWebSignature jws = JsonWebSignature.parse(new GsonFactory(), idToken);
@@ -85,11 +85,11 @@ public class CustomOidcClient implements OidcClient {
     }
 
     @Internal
-    public static class GithubOidcJsonResponse extends GenericJson {
+    public static class CustomOidcJsonResponse extends GenericJson {
         @Key("value")
         private String value;
 
-        public GithubOidcJsonResponse() {
+        public CustomOidcJsonResponse() {
         }
 
         String getValue() {
