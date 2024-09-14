@@ -29,8 +29,8 @@ jobs:
       - name: Install maven program
         run: mvn install
 
-      - name: Print Successfull
-        run: echo "SUCCESS"
-
       - name: Execute Main artifact
         run: mvn exec:java -Dexec.mainClass="ce.kiran.Main"
+
+      - name: Print Successful
+        run: echo "SUCCESS"
