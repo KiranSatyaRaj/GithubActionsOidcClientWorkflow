@@ -63,13 +63,13 @@ public class CustomOidcClient implements OidcClient {
             GenericUrl url = new GenericUrl(urlBase + "&audience=" + this.audience);
 
             try {
-                HttpRequest req = HttpClients.newRequestFactory(this.httpParams).buildGetRequest(url);
-                req.setParser((new GsonFactory()).createJsonObjectParser());
-                req.getHeaders().setAuthorization("Bearer " + bearer);
-                req.getHeaders().setAccept("application/json; api-version=2.0");
-                req.getHeaders().setContentType("application/json");
-                CustomOidcJsonResponse resp = req.execute().parseAs(CustomOidcJsonResponse.class);
-                String idToken = resp.toString();
+               HttpRequest req = HttpClients.newRequestFactory(this.httpParams).buildGetRequest(url);
+               req.setParser(new GsonFactory().createJsonObjectParser());
+               req.getHeaders().setAuthorization("Bearer " + bearer);
+               req.getHeaders().setAccept("application/json; api-version=2.0");
+               req.getHeaders().setContentType("application/json");
+               CustomOidcJsonResponse resp = req.execute().parseAs(CustomOidcJsonResponse.class);
+                String idToken = resp.getValue();
                 this.id_token = idToken;
                 JsonWebSignature jws = JsonWebSignature.parse(new GsonFactory(), idToken);
                 return ImmutableOidcToken.builder().idToken(idToken).issuer(jws.getPayload().getIssuer()).subjectAlternativeName(jws.getPayload().getSubject()).build();
