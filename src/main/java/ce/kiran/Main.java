@@ -28,13 +28,11 @@ public class Main {
     private static Bundle signPayload() throws InvalidAlgorithmParameterException, CertificateException, IOException, NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, KeylessSignerException {
         Path filePath = Paths.get("src/main/java/ce/kiran/hello.txt");
         CustomOidcClient client = CustomOidcClient.builder().build();
-        token = client.getIdToken();
         KeylessSigner signer = new SetDefaults().setOidcClients(OidcClients.of(client));
         return signer.signFile(filePath);
     }
     public static void main(String[] args) throws InvalidAlgorithmParameterException, CertificateException, IOException, NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, KeylessSignerException, OidcException {
         Bundle result = signPayload();
-        System.out.println(token);
         System.out.println(result.toJson());
     }
 }

@@ -70,7 +70,7 @@ public class CustomOidcClient implements OidcClient {
                req.getHeaders().setContentType("application/json");
                CustomOidcJsonResponse resp = req.execute().parseAs(CustomOidcJsonResponse.class);
                 String idToken = resp.getValue();
-                this.id_token = idToken;
+                System.out.println(idToken);
                 JsonWebSignature jws = JsonWebSignature.parse(new GsonFactory(), idToken);
                 return ImmutableOidcToken.builder().idToken(idToken).issuer(jws.getPayload().getIssuer()).subjectAlternativeName(jws.getPayload().getSubject()).build();
             } catch (IOException var9) {
